@@ -1,27 +1,79 @@
-prezzi_prodotti=(
-("Mela",("Lunedì",1.0),("Martedì",1.2),("Mercoledì",1.1),("Giovedì",1.0),("Venerdì",1.2),("Sabato",1.1)),
-("Banana",("Lunedì",0.8),("Martedì",0.9),("Mercoledì",0.7),("Giovedì",0.8),("Venerdì",0.9),("Sabato",0.7)),
-)
+tupla_vendite = (
+                (("RepartoA","Informatica"),("Prodotto A", ("contanti",1000))),
+                (("RepartoA","Informatica"),("Prodotto B", ("carta di credito",1500))),
+                (("RepartoA","Informatica"),("Prodotto C", ("carta di credito",1200))),
+                (("RepartoA","Informatica"),("Prodotto D", ("contanti",200))),
+                (("RepartoA","Informatica"),("Prodotto E", ("contanti",800))),
+                (("RepartoA","Informatica"),("Prodotto F", ("N/D",200))),
+                (("RepartoB","Elettronica"),("Prodotto A", ("contanti",1500))),
+                (("RepartoB","Elettronica"),("Prodotto B", ("carta di credito",900)))
+                )
 
-def prezzoMedio(prezzi_prodotti,prodottoScelto):
-    mediaPrezzo=0
+
+
+def media_globale(tupla_vendite):
+    media=0
     cont=0
-    for prodotto,*altro in prezzi_prodotti:
-        for giorno,prezzo in altro:
-            if(prodotto==prodottoScelto):
-                mediaPrezzo+=prezzo
+    for reparto,(prodotto,(metodoP,prezzo)) in tupla_vendite:
+        media+=prezzo
+        cont+=1
+        
+    return (media/cont)
+
+def media(tupla_vendite):
+    media=0
+    cont=0
+    for reparto,(prodotto,(metodoP,prezzo)) in tupla_vendite:
+        if(reparto==cat):
+            if(metodoP==tipPag):
+                media+=prezzo
                 cont+=1
-    return mediaPrezzo/cont
+    return (media/cont)
 
-def prezzoMedioAll(prezzi_prodotti):
-    cont=0
-    mediaPrezzoAll=0
-    for prodotto,*altro in prezzi_prodotti:
-        for giorno,prezzo in altro:
-            mediaPrezzoAll+=prezzo
-            cont+=1
-    return mediaPrezzoAll/cont
+def venditaMax(tupla_vendite):
+    vMax=0
+    for reparto,(prodotto,(metodoP,prezzo)) in tupla_vendite:
+        if (vMax<prezzo):
+            rep=reparto
+            prod=prodotto
+            metodoPag=metodoP
+            costo=prezzo
+    return rep,prod,metodoPag,prezzo
 
-prodotto=input("Inserisci un prodotto per verificarne il prezzo medio: ")
-print("Il prezzo medio del prodotto:",prodotto," è di: ",prezzoMedio(prezzi_prodotti,prodotto))
-print("Il prezzo medio di tutti i prodotti è di: ",prezzoMedioAll(prezzi_prodotti))
+def venditaMin(tupla_vendite):
+    vMin=9999
+    for reparto,(prodotto,(metodoP,prezzo)) in tupla_vendite:
+        if (vMin>prezzo):
+            rep=reparto
+            prod=prodotto
+            metodoPag=metodoP
+            costo=prezzo
+    return rep,prod,metodoPag,prezzo
+    
+
+mediaTot=media_globale(tupla_vendite)
+mediaScelte=media_globale(tupla_vendite)
+valMax=venditaMax(tupla_vendite)
+valMin=venditaMin(tupla_vendite)
+
+while(True):
+    menu=int(input("1) media globale,2) media,3)venditaMax,4)venditaMin,5)vednitaPer: "))
+    if(menu==1):
+        print("La media totale è di: ",mediaTot)
+    elif(menu==2):
+        cat=input("Inserisci la categoria: ")
+        tipPag=input("Inserisci la tipologia di pagamento: ")
+        print("La media di importi con il metodo di pagamento: ",cat," è di: ",mediaScelte)
+    elif(menu==3):
+        print("Il valore massimo è: ",valMax)
+    elif(menu==4):
+        print("Il valore massimo è: ",valMin)
+    elif(menu==5):
+        print("B")
+    else:
+        break
+
+
+
+print("La media totale è di: ",mediaTot)
+print("La media di importi con il metodo di pagamento: ",cat," è di: ",mediaScelte)
