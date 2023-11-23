@@ -1,0 +1,74 @@
+tupla_consumi_energetici = (
+    ("Milano", [
+        ("gennaio", ("elettrico", 300)),
+        ("gennaio", ("gas", 150)),
+        ("febbraio", ("elettrico", 280)),
+        ("febbraio", ("gas", 120)),
+        ("marzo",("gas",110)),
+        ("marzo", ("elettrico", 200)),
+        ("aprile", ("gas", 100)),
+        ("aprile", ("elettrico", 180)),
+    ]),
+    
+    ("Brescia", [
+        ("gennaio", ("elettrico", 280)),
+        ("gennaio", ("gas", 140)),
+        ("febbraio", ("elettrico", 260)),
+        ("febbraio", ("gas", 130)),
+        ("marzo",("gas",110)),
+        ("marzo", ("elettrico", 200)),
+        ("aprile", ("gas", 100)),
+        ("aprile", ("elettrico", 180)),
+    ]),
+    
+      ("Monza", [
+        ("gennaio", ("elettrico", 260)),
+        ("gennaio", ("gas", 120)),
+        ("febbraio", ("elettrico", 270)),
+        ("febbraio", ("gas", 110)),
+        ("marzo",("gas",100)),
+        ("marzo", ("elettrico", 210)),
+        ("aprile", ("gas", 120)),
+        ("aprile", ("elettrico", 170)),
+    ]),
+    
+)
+
+def analizza_consumi_energetici(tupla_consumi_energetici):
+    contGas=0
+    contEle=0
+    consGas=0
+    consEle=0
+    for citta,*altro in tupla_consumi_energetici:
+        dati=altro[0]
+        for mese in dati:
+            for risorsa,consumo in dati:
+                if(cittaIns==citta):
+                    if(risorsaIns=="elettrico" or risorsaIns=="gas"):
+                        if(risorsa=="elettrico"):
+                            contEle+=1
+                            consEle+=consumo
+                        elif(risorsa=="gas"):
+                            contGas+=1
+                            consGas+=consumo
+                    else:
+                        print("risorsa inesistente")
+        consGas=consGas/contGas
+        consEle=consEle/contEle                 
+    return (consEle,consGas)
+    
+
+    
+
+# Esempio di utilizzo
+#risultato_analisi = analizza_consumi_energetici("Milano", "elettrico")
+cittaIns=input("Inserisci una città:")
+risorsaIns=input("Inserisci una risorsa:")
+cGas,cEle=analizza_consumi_energetici(tupla_consumi_energetici)
+if(risorsaIns=="gas"):
+    print("consumo medio di:",risorsaIns,"nella città:",cittIns,"è stato di:",cGas)
+else:
+    print("consumo medio di:",risorsaIns,"nella città:",cittIns,"è stato di:",cEle)
+
+
+

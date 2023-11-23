@@ -1,0 +1,111 @@
+tupla_partite = (
+    ("SquadraA", "SquadraB", 3, 2),
+    ("SquadraC", "SquadraD", 1, 1),
+    ("SquadraB", "SquadraC", 2, 4),
+    ("SquadraD", "SquadraA", 0, 3),
+    ("SquadraB", "SquadraD", 1, 2),
+)
+
+def media_gol_partite(tupla_partite):
+    mediaGol=0
+    for squadra1,*altro in tupla_partite:
+        squadra2,gol1,gol2=altro
+        mediaGol+=gol1+gol2
+    return mediaGol
+
+#def media_gol_squadra(tupla_partite,squadraIns):
+    #mediaGol=0
+    #for squadra1,*altro in tupla_partite:
+         #if(squadraIns==squadra1 or squadraIns==altro[0]):
+             #mediaGol+=
+
+def partita_con_piu_gol(tupla_partite): 
+    maxGol=0
+    maxGolC=0
+    pos=0
+    for squadra1,*altro in tupla_partite:
+        squadra2,gol1,gol2=altro
+        maxGol=gol1+gol2
+        if(maxGol>maxGolC):
+            maxGolC=maxGol
+            pos=altro
+    return (pos)
+
+def partita_con_meno_gol(tupla_partite): 
+    minGol=0
+    minGolC=999
+    pos=0
+    for squadra1,*altro in tupla_partite:
+        squadra2,gol1,gol2=altro
+        minGol=gol1+gol2
+        if(minGol<minGolC):
+            minGolC=minGol
+            pos=altro
+    return (pos)
+
+
+def percentuale_vittorie_squadra(tupla_partite, squadraIns1):
+    vincitore=""
+    cont1=0
+    cont2=0
+    perc1=0
+    perc2=0
+    for squadra1,*altro in tupla_partite:
+        squadra2,gol1,gol2=altro
+        if(gol1>gol2):
+            vincitore=squadra1
+            cont1+=1
+            if(cont2==0):
+                perc2=="0%"
+                if(cont2==1):
+                    perc2=="20%"
+                    if(cont2==2):
+                        perc2=="40%"
+                        if(cont2==3):
+                            perc2=="60%"
+                            if(cont2==4):
+                                perc2=="80%"
+                                if(cont2==5):
+                                    perc2=="100%"
+        else:
+            vincitore=squadra2
+            cont2+=1
+            if(cont1==0):
+                perc1=="0%"
+                if(cont1==1):
+                    perc1=="20%"
+                    if(cont1==2):
+                        perc1=="40%"
+                        if(cont1==3):
+                            perc1=="60%"
+                            if(cont1==4):
+                                perc1=="80%"
+                                if(cont1==5):
+                                    perc1=="100%"
+    return(vincitore,perc1,perc2)
+
+
+menu=input("Inserisci la funzionalità che vuoi sviluppare:1)media gol,2)media gol squadra,3)partita con più gol,4)partita con meno gol,5)percentuale vittorie,6)esci")
+
+while (menu==True):
+    if(menu==1):
+        print("La media dei gol delle partie è di:",mediaG)
+    if(menu==2):
+        squadraIns=input("Inserisci una squadra:")
+        print("Null")
+    if(menu==3):
+        print("La partita con maggori gol è:",partitaMax)
+    if(menu==4):
+        print("La partita con minori gol è:",partitaMin)
+    if(menu==5):
+        squadraIns1=input("Inserisci una squadra:")
+        print("La squadra",squadraIns1,"ha un totale di vincite pari al:")
+        
+        
+    
+
+
+vincit,percentualeSq1,percentualeSq2=percentuale_vittorie_squadra(vincitore,perc1,perc2)
+partitaMax=partita_con_piu_gol(tupla_partite)
+partitaMin=partita_con_meno_gol(tupla_partite)
+mediaG=media_gol_partite(tupla_partite)
